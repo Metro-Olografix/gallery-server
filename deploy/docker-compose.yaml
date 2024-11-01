@@ -1,0 +1,16 @@
+services:
+  gallery:
+    image: ghcr.io/metro-olografix/gallery-server:dev
+    restart: unless-stopped
+    pull_policy: always
+    networks:
+      - "internal-apps"
+    volumes:
+      - /var/gallery/gallery:/usr/share/nginx/gallery
+    environment:
+      - VIRTUAL_HOST=gallery.olografix.org
+      - LETSENCRYPT_HOST=gallery.olografix.org
+
+networks:
+  internal-apps:
+    external: true
